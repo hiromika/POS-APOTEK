@@ -125,20 +125,27 @@
       </tr>
       <tr>
         <th colspan="4" class="text-center">Uang Pembayaran :</th>
-        <td colspan=""><input type="number" name="bayar" value="" placeholder="" class="bayar form-control"></td>
+        <td colspan="">
+          <div class="input-group">
+            <span class="input-group-addon">Rp.</span>
+            <input type="number" name="bayar" value="" step="100" placeholder="" class="bayar form-control"></td>
+          </div>
         <td></td>
       </tr>
       <tr>
         <th colspan="4" class="text-center">Uang Kembali :</th>
-        <td colspan="" id="kembali"></td>
-        <input type="hidden" class="kembali" name="kembali" value="" placeholder="">
+        <td colspan="" id="kembali">
+          <div class="input-group">
+            <span class="input-group-addon">Rp</span>
+            <input type="text" disabled class="kembali form-control" name="kembali" value="" placeholder=""></td>
+          </div>
         <td></td>
       </tr>
       <tr>
         <td colspan="5">
         <a href="proses_trans.php?kode=3&idt=<?php echo $idt; ?>&del=1" class="btn btn-sm btn-warning pull-right">Cencel</a>
-        <a href="print_trans.php?idt=<?php echo $idt; ?>" style="margin-right: 10px;" class="btn btn-sm btn-info pull-right">Print</a>
-        <a  <?php echo ($tot['total_harga'] <= 0)?'disabled href="#"':'onclick="return confirm(Konfirmasi Transaksi)" href="home.php?link=transaksi&idt=0?>"'; ?>   style="margin-right: 10px;" class="btn btn-sm btn-success pull-right">Done</a>
+        <a href="javascript:void(0)" style="margin-right: 10px;" class="print btn btn-sm btn-info pull-right">Print</a>
+        <a href="javascript:void(0)" style="margin-right: 10px;" class="done btn btn-sm btn-success pull-right">Done</a>
         </td>
       </tr>
       <?php }else{ ?>
@@ -149,31 +156,48 @@
       
     </tbody>
   </table>
-
-
+<!-- home.php?link=transaksi&idt=0 -->
+<!-- print_trans.php?idt=<?php echo $idt; ?> -->
 <script type="text/javascript">
 
   $('.bayar').keyup(function(e) {
       var kembali = $('.bayar').val() - $('.tot').val();
       $('.kembali').val(kembali);
-      $('#kembali').html('Rp.'+kembali);    
+      // $('#kembali').html('Rp.'+kembali);
+      // if ($('.bayar').val() < $('.tot').val()){
+      //   $('.print , .done').attr('disabled', 'disabled');
+      // }
+      // if($('.bayar').val() >= $('.tot').val()){
+      //   $('.print , .done').removeAttr('disabled');
+      // }    
   });
 
+  $('.print').on('click', function(event) {
+    event.preventDefault();  
+    var bayar = $('.bayar').val();
+    var kembali = $('.bayar').val() - $('.tot').val();
+    $(location).attr('href', 'print_trans.php?idt=<?php echo $idt; ?>&bayar='+bayar+'&kembali='+kembali);
+  }); 
 
-  $(function(){
-        $('#tb_makanan,#tb_minuman').DataTable();
-    });
+  $('.done').on('click', function(event) {
+    event.preventDefault();
+    if (confirm('Transaksi Selesai.. ?')){
+      var bayar = $('.bayar').val();
+      var kembali = $('.bayar').val() - $('.tot').val();
+      $(location).attr('href', 'proses_trans.php?kode=4&idt=<?php echo $idt; ?>&bayar='+bayar+'&kembali='+kembali);
+    }  
+  });
 
   $(document).ready(function(){
     $("ul.nav-tabs a,ul.nav-pills a").click(function (e) {
       e.preventDefault();  
         $(this).tab('show');
     });
+    
+    activaTab('aaa');
+    
+    $('#tb_makanan,#tb_minuman').DataTable();
   })
-
-  $(document).ready(function(){
-      activaTab('aaa');
-  });
 
   function activaTab(tab){
       $('.nav-tabs a[href="#set1"]').tab('show');

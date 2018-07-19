@@ -4,7 +4,9 @@
 <?php 
 include "koneksi.php";
   $idt = $_GET['idt'];
- ?>
+  $sql3   = "UPDATE tb_transaksi SET bayar='$_GET[bayar]', kembali = '$_GET[kembali]' WHERE id = '$idt'";
+  $query3 = mysqli_query($conn,$sql3);        
+?>
 <title>Print</title>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -93,7 +95,15 @@ include "koneksi.php";
       <tr>
         <th colspan="3" class="text-center">Jumlah Total :</th>
         <th colspan="" class=""><?php echo $tot['totjum'] ?></th>
-        <td colspan="2"><big><b>Rp.<?php echo number_format($tot['total_harga'],0,',','.'); ?></b></big></td>
+        <td colspan=""><big><b>Rp.<?php echo number_format($tot['total_harga'],0,',','.'); ?></b></big></td>
+      </tr> 
+      <tr>
+        <th colspan="4" class="text-center">Uang Pembayaran :</th>
+        <td colspan=""><big><b>Rp.<?php echo number_format($tot['bayar'],0,',','.'); ?></b></big></td>
+      </tr> 
+      <tr>
+        <th colspan="4" class="text-center">Uang Kembali :</th>
+        <td colspan=""><big><b>Rp.<?php echo number_format($tot['kembali'],0,',','.'); ?></b></big></td>
       </tr>
       
       <?php }?>    

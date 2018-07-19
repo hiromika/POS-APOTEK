@@ -134,7 +134,24 @@ include "koneksi.php";
               </tbody>
             </table>
             </td>
-            <td>Rp. <?php echo number_format($tran['total_harga'] ,0,',','.'); ?></td>
+            <td><table style="width: 100%;">
+                <tr>
+                  <th>Belanja</th>
+                  <th>:</th>
+                  <td>Rp. <?php echo number_format($tran['total_harga'] ,0,',','.'); ?></td>
+                </tr>
+                <tr>
+                  <th>Bayar</th>
+                  <th>:</th>
+                  <td>Rp. <?php echo number_format($tran['bayar'] ,0,',','.'); ?></td>
+                </tr>
+                <tr>
+                  <th>Kembali</th>
+                  <th>:</th>
+                  <td>Rp. <?php echo number_format($tran['kembali'] ,0,',','.'); ?></td>
+                </tr>
+              </table>
+            </td>
             <td>Rp. <?php echo number_format($tran['laba'] ,0,',','.'); ?></td>
           </tr>
         <?php 

@@ -1,12 +1,5 @@
 <?php 
 include "koneksi.php";
-$idb 	= $_POST['idb'];
-$jml	= $_POST['jumlah'];
-$harga	= $_POST['harga_jual'];
-$modal	= $_POST['harga_modal'];
-$tot	= $jml * $harga;
-$tot2 	= $jml * $modal;
-$laba	= $tot - $tot2; 
 $idt 	= $_GET['idt'];
 $code 	= $_GET['kode'];
 
@@ -14,6 +7,13 @@ $code 	= $_GET['kode'];
 switch ($code) {
 	case '1':
 		// tambah
+		$idb 	= $_POST['idb'];
+		$jml	= $_POST['jumlah'];
+		$harga	= $_POST['harga_jual'];
+		$modal	= $_POST['harga_modal'];
+		$tot	= $jml * $harga;
+		$tot2 	= $jml * $modal;
+		$laba	= $tot - $tot2; 
 			if ($idt > 0) {
 				$sql	= "INSERT INTO tb_transaksi_list (id_trans,id_menu,jumlah,harga_total,laba) VALUES('$idt','$idb','$jml','$tot','$laba')";
 				$query 	= mysqli_query($conn,$sql); 
@@ -63,6 +63,13 @@ switch ($code) {
 			}
 		break;
 	case '2':
+		$idb 	= $_POST['idb'];
+		$jml	= $_POST['jumlah'];
+		$harga	= $_POST['harga_jual'];
+		$modal	= $_POST['harga_modal'];
+		$tot	= $jml * $harga;
+		$tot2 	= $jml * $modal;
+		$laba	= $tot - $tot2; 
 		// hapus
 			if (isset($_GET['idts'])) {
 				$idts = $_GET['idts'];
@@ -102,7 +109,13 @@ switch ($code) {
 			}
 		break;
 	case '3':
-		
+		$idb 	= $_POST['idb'];
+		$jml	= $_POST['jumlah'];
+		$harga	= $_POST['harga_jual'];
+		$modal	= $_POST['harga_modal'];
+		$tot	= $jml * $harga;
+		$tot2 	= $jml * $modal;
+		$laba	= $tot - $tot2; 
 			if ($_GET['del']=1) {
 
 				$sq	= "SELECT * FROM tb_transaksi_list WHERE id_trans = '$idt'";
@@ -136,7 +149,13 @@ switch ($code) {
 				header('Location: home.php?link=transaksi&idt=0');
 			}
 		break;
-	
+	case '4':
+		if ($idt > 0) {
+			$sql3   = "UPDATE tb_transaksi SET bayar='$_GET[bayar]', kembali = '$_GET[kembali]' WHERE id = '$idt'";
+  			$query3 = mysqli_query($conn,$sql3);      
+			header('Location: home.php?link=transaksi&idt=0');
+		}
+		break;
 	default:
 		echo "Not Found";
 		break;
