@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2018 at 11:58 AM
--- Server version: 10.1.9-MariaDB
+-- Generation Time: 19 Jul 2018 pada 21.23
+-- Versi Server: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_jenis`
+-- Struktur dari tabel `tb_jenis`
 --
 
 CREATE TABLE `tb_jenis` (
@@ -32,7 +32,7 @@ CREATE TABLE `tb_jenis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_jenis`
+-- Dumping data untuk tabel `tb_jenis`
 --
 
 INSERT INTO `tb_jenis` (`id`, `nama_jenis`) VALUES
@@ -44,7 +44,7 @@ INSERT INTO `tb_jenis` (`id`, `nama_jenis`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_obat`
+-- Struktur dari tabel `tb_obat`
 --
 
 CREATE TABLE `tb_obat` (
@@ -63,17 +63,17 @@ CREATE TABLE `tb_obat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_obat`
+-- Dumping data untuk tabel `tb_obat`
 --
 
 INSERT INTO `tb_obat` (`id`, `kode_obat`, `id_supp`, `nama_obat`, `keterangan`, `harga_modal`, `harga_jual`, `jenis`, `satuan`, `stock`, `last_update`, `foto`) VALUES
-(1, '2451', 2, 'Laserin', 'asd', 10000, 15000, 3, 'Botol', 6, '2018-07-03 19:37:54', ''),
-(2, '3232', 2, 'Panadol', 'zxc', 5000, 6000, 2, 'Strip', 15, '2018-07-03 19:38:44', '');
+(1, '2451', 2, 'Laserin', 'asd', 10000, 15000, 3, 'Botol', 0, '2018-07-03 19:37:54', ''),
+(2, '3232', 2, 'Panadol', 'zxc', 5000, 6000, 2, 'Strip', 8, '2018-07-03 19:38:44', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_obat_stok`
+-- Struktur dari tabel `tb_obat_stok`
 --
 
 CREATE TABLE `tb_obat_stok` (
@@ -84,7 +84,7 @@ CREATE TABLE `tb_obat_stok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_obat_stok`
+-- Dumping data untuk tabel `tb_obat_stok`
 --
 
 INSERT INTO `tb_obat_stok` (`id`, `id_obat`, `tgl_masuk`, `tgl_expired`) VALUES
@@ -122,7 +122,7 @@ INSERT INTO `tb_obat_stok` (`id`, `id_obat`, `tgl_masuk`, `tgl_expired`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_permintaan`
+-- Struktur dari tabel `tb_permintaan`
 --
 
 CREATE TABLE `tb_permintaan` (
@@ -133,7 +133,7 @@ CREATE TABLE `tb_permintaan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_permintaan`
+-- Dumping data untuk tabel `tb_permintaan`
 --
 
 INSERT INTO `tb_permintaan` (`id_per`, `id_supp`, `jumlah`, `tgl`) VALUES
@@ -142,7 +142,7 @@ INSERT INTO `tb_permintaan` (`id_per`, `id_supp`, `jumlah`, `tgl`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_permintaan_list`
+-- Struktur dari tabel `tb_permintaan_list`
 --
 
 CREATE TABLE `tb_permintaan_list` (
@@ -153,7 +153,7 @@ CREATE TABLE `tb_permintaan_list` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_permintaan_list`
+-- Dumping data untuk tabel `tb_permintaan_list`
 --
 
 INSERT INTO `tb_permintaan_list` (`id_list`, `id_per`, `id_obat`, `jumlah`) VALUES
@@ -164,7 +164,7 @@ INSERT INTO `tb_permintaan_list` (`id_list`, `id_per`, `id_obat`, `jumlah`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_supplier`
+-- Struktur dari tabel `tb_supplier`
 --
 
 CREATE TABLE `tb_supplier` (
@@ -175,7 +175,7 @@ CREATE TABLE `tb_supplier` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_supplier`
+-- Dumping data untuk tabel `tb_supplier`
 --
 
 INSERT INTO `tb_supplier` (`id_supplier`, `nama_supp`, `alamat_supp`, `tlp_supp`) VALUES
@@ -184,28 +184,22 @@ INSERT INTO `tb_supplier` (`id_supplier`, `nama_supp`, `alamat_supp`, `tlp_supp`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_transaksi`
+-- Struktur dari tabel `tb_transaksi`
 --
 
 CREATE TABLE `tb_transaksi` (
   `id` int(11) NOT NULL,
   `jumlah_menu` int(11) NOT NULL,
   `total_harga` int(12) NOT NULL,
+  `bayar` int(11) NOT NULL,
+  `kembali` int(11) NOT NULL,
   `tgl_transaksi` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_transaksi`
---
-
-INSERT INTO `tb_transaksi` (`id`, `jumlah_menu`, `total_harga`, `tgl_transaksi`) VALUES
-(2, 2, 57000, '2018-07-03 19:38:55'),
-(3, 2, 33000, '2018-07-04 18:31:03');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_transaksi_list`
+-- Struktur dari tabel `tb_transaksi_list`
 --
 
 CREATE TABLE `tb_transaksi_list` (
@@ -218,20 +212,10 @@ CREATE TABLE `tb_transaksi_list` (
   `tgl_trans` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tb_transaksi_list`
---
-
-INSERT INTO `tb_transaksi_list` (`id`, `id_trans`, `id_menu`, `jumlah`, `harga_total`, `laba`, `tgl_trans`) VALUES
-(2, 2, 2, 2, 12000, 2000, '2018-07-03 19:38:51'),
-(3, 2, 1, 3, 45000, 15000, '2018-07-03 19:38:55'),
-(4, 3, 1, 1, 15000, 5000, '2018-07-04 18:28:50'),
-(6, 3, 2, 3, 18000, 3000, '2018-07-04 18:31:03');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user`
+-- Struktur dari tabel `tb_user`
 --
 
 CREATE TABLE `tb_user` (
@@ -242,7 +226,7 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_user`
+-- Dumping data untuk tabel `tb_user`
 --
 
 INSERT INTO `tb_user` (`id`, `username`, `password`, `level`) VALUES
@@ -347,12 +331,12 @@ ALTER TABLE `tb_supplier`
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_transaksi_list`
 --
 ALTER TABLE `tb_transaksi_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
