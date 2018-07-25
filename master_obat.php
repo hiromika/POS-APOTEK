@@ -1,5 +1,5 @@
 <h1>Master Data Obat</h1>
-<button type="button" style="margin-bottom: 10px;" class="btn btn-info pull-right" data-toggle="modal" id="btntambah">Tambah obat</button>
+<!-- <button type="button" style="margin-bottom: 10px;" class="btn btn-info pull-right" data-toggle="modal" id="btntambah">Tambah obat</button> -->
 <br>
 	<table class="table table-responsive table-hover" id="tb_master">
 		<thead>

@@ -91,6 +91,9 @@ if (isset($_SESSION['username'])){
                   <li>
                       <a href="home.php?link=permintaan&id_per=0">Form Permintaan Obat</a>
                   </li> 
+                  <li>
+                      <a href="home.php?link=tambah_obat">Form Penambahan Obat</a>
+                  </li> 
                   <li><a href="#" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">Laporan</a>
                     <ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
                       <li><a href="home.php?link=rekap" >Laporan Penjualan Obat</a></li>
@@ -154,6 +157,9 @@ if (isset($_SESSION['username'])){
                   break; 
                 case 'permintaan':
                   include "permintaan.php";
+                  break;
+                case 'tambah_obat':
+                  include "tambah_obat.php";
                   break; 
                 case 'rekap_permintaan':
                   include "rekap_permintaan.php";
