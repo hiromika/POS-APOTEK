@@ -114,29 +114,38 @@ if (isset($code)) {
 		$keterangan		= $_POST['keterangan'];
 		$stock			= $_POST['stock'];
 
-		$sql = "INSERT INTO tb_obat VALUES('','$kode_obat','$supp','$nama_obat','$keterangan','$modal','$jual','$jenis','$satuan_obat','$stock',CURRENT_TIME(),'')";
-		$query = mysqli_query($conn,$sql);
-
-		$idb = mysqli_insert_id($conn);
-		$x = 1; 
-		while ( $x <= $stock) {
-			$sql2 = "INSERT INTO tb_obat_stok VALUES('','$idb',CURRENT_TIME(),'$tgl_exp')";
-			$query2 = mysqli_query($conn,$sql2);
-			$x++;
-		}
-
-		if($query){ ?>
-			<script type="text/javascript">
+		$sq = mysqli_query($conn, "SELECT stock FROM tb_obat WHERE kode_obat = '$kode_obat'");
+  		if (mysqli_num_rows($sq) > 0) { ?>
+  			<script type="text/javascript">
+				alert('Insert Gagal Kode Obat Sudah Ada.!');
 				window.location.href = 'home.php?link=master_obat';
 			</script>
+  		<?php }else{
 
-		<?php }else{ ?>
-			<script type="text/javascript">
-				alert('Insert Gagal!');
-				window.location.href = 'home.php?link=master_obat';
-			</script>
-		<?php }
+			$sql = "INSERT INTO tb_obat VALUES('','$kode_obat','$supp','$nama_obat','$keterangan','$modal','$jual','$jenis','$satuan_obat','$stock',CURRENT_TIME(),'')";
+			$query = mysqli_query($conn,$sql);
 
+			$idb = mysqli_insert_id($conn);
+			$x = 1; 
+			while ( $x <= $stock) {
+				$sql2 = "INSERT INTO tb_obat_stok VALUES('','$idb',CURRENT_TIME(),'$tgl_exp')";
+				$query2 = mysqli_query($conn,$sql2);
+				$x++;
+			}
+
+			if($query){ ?>
+				<script type="text/javascript">
+					window.location.href = 'home.php?link=master_obat';
+				</script>
+
+			<?php }else{ ?>
+				<script type="text/javascript">
+					alert('Insert Gagal!');
+					window.location.href = 'home.php?link=master_obat';
+				</script>
+			<?php }
+
+  		}
 	}
 
 }else{
