@@ -27,15 +27,15 @@ switch ($code) {
 				$sql3 	= "UPDATE tb_transaksi SET jumlah_menu ='$jum', total_harga = '$har' WHERE id = '$idt'";
 				$query3	= mysqli_query($conn,$sql3);  
 				
-				$sql4	= "SELECT stock FROM tb_obat WHERE id = '$idb'";
+				$sql4	= "SELECT stock FROM tb_barang WHERE id = '$idb'";
 				$query4 = mysqli_query($conn,$sql4);
 				$st 	= mysqli_fetch_assoc($query4);
 
-				$del = mysqli_query($conn,"DELETE FROM tb_obat_stok WHERE id_barang = $idb ORDER BY id ASC LIMIT $jml");
+				$del = mysqli_query($conn,"DELETE FROM tb_barang_stok WHERE id_barang = $idb ORDER BY id ASC LIMIT $jml");
 				
 				$stock	= $st['stock'] - $jml;
 
-				$sql5 	= "UPDATE tb_obat SET stock ='$stock' WHERE id = '$idb'";
+				$sql5 	= "UPDATE tb_barang SET stock ='$stock' WHERE id = '$idb'";
 				$query5	= mysqli_query($conn,$sql5);  
 
 				header('Location: home.php?link=transaksi&idt='.$idt.'');
@@ -49,14 +49,14 @@ switch ($code) {
 				$sql2	= "INSERT INTO tb_transaksi_list (id_trans,id_menu,jumlah,harga_total,laba) VALUES('$id','$idb','$jml','$tot','$laba')";
 				$query2 = mysqli_query($conn,$sql2); 
 
-				$sql4	= "SELECT stock FROM tb_obat WHERE id = '$idb'";
+				$sql4	= "SELECT stock FROM tb_barang WHERE id = '$idb'";
 				$query4 = mysqli_query($conn,$sql4);
 				$st 	= mysqli_fetch_assoc($query4);
 
-				$del = mysqli_query($conn,"DELETE FROM tb_obat_stok WHERE id_barang = $idb ORDER BY id ASC LIMIT $jml");
+				$del = mysqli_query($conn,"DELETE FROM tb_barang_stok WHERE id_barang = $idb ORDER BY id ASC LIMIT $jml");
 
 				$stock	= $st['stock'] - $jml;
-				$sql5 	= "UPDATE tb_obat SET stock ='$stock' WHERE id = '$idb'";
+				$sql5 	= "UPDATE tb_barang SET stock ='$stock' WHERE id = '$idb'";
 				$query5	= mysqli_query($conn,$sql5);  
 
 				header('Location: home.php?link=transaksi&idt='.$id.'');
@@ -86,20 +86,20 @@ switch ($code) {
 				$sql3 	= "UPDATE tb_transaksi SET jumlah_menu ='$jum', total_harga = '$har' WHERE id = '$idt'";
 				$query3	= mysqli_query($conn,$sql3);  
 				
-				$sql4	= "SELECT stock FROM tb_obat WHERE id = '$tr[id_menu]'";
+				$sql4	= "SELECT stock FROM tb_barang WHERE id = '$tr[id_menu]'";
 				$query4 = mysqli_query($conn,$sql4);
 				$st 	= mysqli_fetch_assoc($query4);
 
 				$x = 1; 
 				while ( $x <= $tr['jumlah']) {
-					$sql2 = "INSERT INTO tb_obat_stok VALUES('','$tr[id_menu]',CURRENT_TIME())";
+					$sql2 = "INSERT INTO tb_barang_stok VALUES('','$tr[id_menu]',CURRENT_TIME())";
 					$query2 = mysqli_query($conn,$sql2);
 					$x++;
 				}
 
 				$stock	= $st['stock'] + $tr['jumlah'];
 
-				$sql5 	= "UPDATE tb_obat SET stock ='$stock' WHERE id = '$tr[id_menu]'";
+				$sql5 	= "UPDATE tb_barang SET stock ='$stock' WHERE id = '$tr[id_menu]'";
 				$query5	= mysqli_query($conn,$sql5);  
 
 				$sql6 	= "DELETE FROM tb_transaksi_list WHERE id = '$idts'";
@@ -122,20 +122,20 @@ switch ($code) {
 				$quer 	= mysqli_query($conn,$sq);
 				while ($data = mysqli_fetch_array($quer)) {
 					$idts = $data['id_menu'];
-					$sql4	= "SELECT stock FROM tb_obat WHERE id = '$idts'";
+					$sql4	= "SELECT stock FROM tb_barang WHERE id = '$idts'";
 					$query4 = mysqli_query($conn,$sql4);
 					$st 	= mysqli_fetch_assoc($query4);
 					$stock	= $st['stock'] + $data['jumlah'];
 
 					$x = 1; 
 					while ( $x <= $data['jumlah']) {
-						$sql2 = "INSERT INTO tb_obat_stok VALUES('','$idts',CURRENT_TIME())";
+						$sql2 = "INSERT INTO tb_barang_stok VALUES('','$idts',CURRENT_TIME())";
 						$query2 = mysqli_query($conn,$sql2);
 						$x++;
 					}
 
 
-					$sql5 	= "UPDATE tb_obat SET stock ='$stock' WHERE id = '$idts'";
+					$sql5 	= "UPDATE tb_barang SET stock ='$stock' WHERE id = '$idts'";
 					$query5	= mysqli_query($conn,$sql5);  
 				}
 				
@@ -151,7 +151,7 @@ switch ($code) {
 		break;
 	case '4':
 		if ($idt > 0) {
-			$sql3   = "UPDATE tb_transaksi SET bayar='$_GET[bayar]', kembali = '$_GET[kembali]' WHERE id = '$idt'";
+			$sql3   = "UPDATE tb_transaksi SET nama_konsumen='$_GET[konsumen]', bayar='$_GET[bayar]', kembali = '$_GET[kembali]' WHERE id = '$idt'";
   			$query3 = mysqli_query($conn,$sql3);      
 			header('Location: home.php?link=transaksi&idt=0');
 		}

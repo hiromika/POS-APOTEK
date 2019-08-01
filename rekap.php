@@ -36,10 +36,11 @@ if (isset($_POST['tgl'])) {
 					<tr class="bg-success">
 						<th>No</th>
 						<th>Id Trans</th>
+						<th>Konsumen</th>
 						<th>Tgl Transaksi</th>
-						<th style="width: 10px;">Total Jenis obat</th>
-						<th style="width: 10px;">Total obat </th>
-						<th style="width: 40%;">List obat </th>	
+						<th style="width: 10px;">Total Jenis barang</th>
+						<th style="width: 10px;">Total barang </th>
+						<th style="width: 40%;">List barang </th>	
 						<th>Total harga</th>
 						<th>Laba Keuntungan</th>
 					</tr>
@@ -48,24 +49,24 @@ if (isset($_POST['tgl'])) {
 				<?php 
 				if (isset($tgl)) {
 					$sql = " SELECT a.*,
-								b.nm_obat, 
-								b.hr_obat,
+								b.nm_barang, 
+								b.hr_barang,
 								b.satuan, 
-								b.jm_obat,
+								b.jm_barang,
 								b.laba, 
-								b.jum_obat
+								b.jum_barang
 						FROM tb_transaksi a 
 						LEFT JOIN (
 							SELECT 
 								z.id_trans, 
-								SUM(z.jumlah) as jum_obat ,
+								SUM(z.jumlah) as jum_barang ,
 							 	SUM(z.laba) as laba,
-								GROUP_CONCAT(x.nama_obat) as nm_obat ,
-								GROUP_CONCAT(x.harga_jual) as hr_obat ,
+								GROUP_CONCAT(x.nama_barang) as nm_barang ,
+								GROUP_CONCAT(x.harga_jual) as hr_barang ,
 								GROUP_CONCAT(x.satuan) as satuan ,
-								GROUP_CONCAT(z.jumlah) as jm_obat 
+								GROUP_CONCAT(z.jumlah) as jm_barang 
 								FROM tb_transaksi_list z 
-								LEFT JOIN  tb_obat x ON z.id_menu = x.id 
+								LEFT JOIN  tb_barang x ON z.id_menu = x.id 
 								GROUP BY z.id_trans
 						) as b ON b.id_trans = a.id
 						WHERE a.tgl_transaksi BETWEEN '$tgl[awal]' AND '$tgl[akhir]'
@@ -73,24 +74,24 @@ if (isset($_POST['tgl'])) {
 				}else{
 
 					 $sql =" SELECT 	a.*,
-								b.nm_obat, 
-								b.hr_obat,
+								b.nm_barang, 
+								b.hr_barang,
 								b.satuan, 
-								b.jm_obat,
+								b.jm_barang,
 								b.laba, 
-								b.jum_obat
+								b.jum_barang
 						FROM tb_transaksi a 
 						LEFT JOIN (
 							SELECT 
 								z.id_trans, 
-								SUM(z.jumlah) as jum_obat ,
+								SUM(z.jumlah) as jum_barang ,
 							 	SUM(z.laba) as laba,
-								GROUP_CONCAT(x.nama_obat) as nm_obat ,
-								GROUP_CONCAT(x.harga_jual) as hr_obat ,
+								GROUP_CONCAT(x.nama_barang) as nm_barang ,
+								GROUP_CONCAT(x.harga_jual) as hr_barang ,
 								GROUP_CONCAT(x.satuan) as satuan ,
-								GROUP_CONCAT(z.jumlah) as jm_obat 
+								GROUP_CONCAT(z.jumlah) as jm_barang 
 								FROM tb_transaksi_list z 
-								LEFT JOIN  tb_obat x ON z.id_menu = x.id 
+								LEFT JOIN  tb_barang x ON z.id_menu = x.id 
 								GROUP BY z.id_trans
 						) as b ON b.id_trans = a.id
 						ORDER BY a.id DESC";
@@ -108,9 +109,10 @@ if (isset($_POST['tgl'])) {
 					<tr>
 						<td><?php echo $no++; ?></td>
 						<td><?php echo 'TR-'.$tran['id']; ?></td>
+						<td><?php echo $tran['nama_konsumen']; ?></td>
 						<td><?php echo date('d-M-Y H:i A', strtotime($tran['tgl_transaksi'])); ?></td>
 						<td><?php echo $tran['jumlah_menu']; ?></td>
-						<td><?php echo $tran['jum_obat']; ?></td>
+						<td><?php echo $tran['jum_barang']; ?></td>
 						<td><table style="width: 100%;">
 							<thead>
 								<tr>
@@ -122,10 +124,10 @@ if (isset($_POST['tgl'])) {
 							</thead>
 							<tbody>
 							<?php 
-								$nm = split(',', $tran['nm_obat']);
+								$nm = split(',', $tran['nm_barang']);
 								$sz = split(',', $tran['satuan']);
-								$hr = split(',', $tran['hr_obat']);
-								$jm = split(',', $tran['jm_obat']);
+								$hr = split(',', $tran['hr_barang']);
+								$jm = split(',', $tran['jm_barang']);
 							 for ($i=0; $i < count($jm) ; $i++) { 						
 							 ?>
 

@@ -1,5 +1,5 @@
 <?php $id_per = $_GET['id_per']; ?>
-<h1>Form Permintaan Obat</h1>
+<h1>Form Permintaan Barang</h1>
 <div class="col-md-6">
 	<form action="proses_permintaan.php" method="POST" accept-charset="utf-8">
 		<input type="hidden" name="id_per" value="<?php echo $id_per; ?>" placeholder="">
@@ -20,13 +20,13 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="">Obat</label>
-			<select name="obat" class="form-control">
-				<option value="">~ Pilih Obat ~</option>
-				<?php $qob = "SELECT * FROM tb_obat";
+			<label for="">barang</label>
+			<select name="barang" class="form-control">
+				<option value="">~ Pilih barang ~</option>
+				<?php $qob = "SELECT * FROM tb_barang";
 				$exo = mysqli_query($conn, $qob);
 				while ($ob = mysqli_fetch_array($exo)) { ?>
-					<option value="<?php echo $ob['id'] ?>"><?php echo $ob['nama_obat'] ?></option>
+					<option value="<?php echo $ob['id'] ?>"><?php echo $ob['nama_barang'] ?></option>
 				<?php }
 				 ?>
 			</select>
@@ -50,7 +50,7 @@
 				<tr>
 					<th>No</th>
 					<th>Supplier</th>
-					<th>Nama obat</th>
+					<th>Nama barang</th>
 					<th>Jumlah</th>
 					<th>Aksi</th>
 				</tr>
@@ -58,10 +58,10 @@
 			<tbody>
 			<?php
 			$no = 1;
-			$sql = "SELECT a.*, b.nama_supp, c.nama_obat FROM tb_permintaan_list a 
+			$sql = "SELECT a.*, b.nama_supp, c.nama_barang FROM tb_permintaan_list a 
 			LEFT JOIN tb_permintaan z ON a.id_per = z.id_per 
 			LEFT JOIN tb_supplier b ON z.id_supp = b.id_supplier 
-			LEFT JOIN tb_obat c ON a.id_obat = c.id
+			LEFT JOIN tb_barang c ON a.id_barang = c.id
 			WHERE a.id_per = '$id_per'";
 			$exe = mysqli_query($conn,$sql);
 			while ($value =  mysqli_fetch_array($exe)) { ?>
@@ -69,7 +69,7 @@
 				<tr>
 					<td><?php echo $no++; ?></td>
 					<td><?php echo $value['nama_supp'] ?></td>
-					<td><?php echo $value['nama_obat'] ?></td>
+					<td><?php echo $value['nama_barang'] ?></td>
 					<td><?php echo $value['jumlah'] ?></td>
 					<td><a href="" title="" class="btn btn-sm btn-danger">Delete</a></td>
 				</tr>

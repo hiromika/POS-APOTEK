@@ -5,14 +5,14 @@ include "koneksi.php";
 $id_per = $_POST['id_per'];
 $tgl 	= date('Y-m-d',strtotime($_POST['tgl']));
 $supp 	= $_POST['sup'];
-$obat 	= $_POST['obat'];
+$barang = $_POST['barang'];
 $jml 	= $_POST['jml'];
 
 if ($id_per == 0) {
 
 	$sql 	= mysqli_query($conn,"INSERT INTO tb_permintaan VALUES('','$supp','$jml','$tgl')");
 	$id 	= mysqli_insert_id($conn);
-	$sql2 	= mysqli_query($conn,"INSERT INTO tb_permintaan_list VALUES('','$id','$obat','$jml')");
+	$sql2 	= mysqli_query($conn,"INSERT INTO tb_permintaan_list VALUES('','$id','$barang','$jml')");
 		if ($sql2) { ?>
 			<script type="text/javascript">
 				alert('Tambah Data Sukses !');
@@ -27,7 +27,7 @@ if ($id_per == 0) {
 		}
 }else{
 	$sql 	= mysqli_query($conn,"UPDATE tb_permintaan SET jumlah = jumlah + '$jml' WHERE id_per = $id_per");
-	$sql2 	= mysqli_query($conn,"INSERT INTO tb_permintaan_list VALUES('','$id_per','$obat','$jml')");
+	$sql2 	= mysqli_query($conn,"INSERT INTO tb_permintaan_list VALUES('','$id_per','$barang','$jml')");
 	if ($sql2) { ?>
 		<script type="text/javascript">
 			alert('Tambah Data Sukses !');

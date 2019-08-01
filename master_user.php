@@ -26,7 +26,7 @@
 				}elseif ($data['level'] == 2) {
 					echo 'Kasir';
 				}else{
-					echo 'Admin';
+					echo 'Super Admin';
 				} ?></td>
 				<td><a href="" class="btn btn-success btn-xs btnedit" data-toggle="modal" title="">Edit</a>&nbsp
 				<a href="proses_user.php?kode=3&id=<?php echo $data['id'];?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah Anda Yakin.. ?');" title="">Delete</a></td>
@@ -61,7 +61,7 @@
 			<div class="form-group">
 				<label> Level :</label>
 				<select name="level" class="form-control">
-					<option value="0">Admin</option>
+					<option value="0">Super Admin</option>
 					<option value="1">Gudang</option>
 					<option value="2">Kasir</option>
 				</select>
@@ -104,7 +104,7 @@
 			<div class="form-group" id="level">
 				<label> Level :</label>
 				<select name="level" class="form-control">
-					<option value="0">Admin</option>
+					<option value="0">Super Admin</option>
 					<option value="1">Gudang</option>
 					<option value="2">Kasir</option>
 				</select>

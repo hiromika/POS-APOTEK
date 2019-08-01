@@ -24,19 +24,19 @@ include "koneksi.php";
 		}
 </style>
 </head>
-<body onload="window.print(); history.back()  " style="font-size: 20px;">
+<body onload="window.print();  " style="font-size: 20px;">
   <?php $id_per = $_GET['id_per']; ?>
 <div class="container">
  <div class="row">
    <div class="col-md-12">
    <table class="table">
      <tr>
-       <td style="width: 30% !important;">
-        <img style="width: 50%; height: 30%;" src="assets/img/logo.jpg"> 
+       <td style="width: 20% !important;">
+        <img style="width: 100px; height: 100px;" src="assets/img/logo.png"> 
        </td>
        <td>
-        <h3 class="text-center">Apotek Nusa Indah<br>
-           <h5 class="text-center">Jln Dipati Ukur No 76 Kota Bandung</h5></h3> 
+        <h3 class="text-center">CV Gunung Mas Sejahtera<br>
+           <h5 class="text-center">Jl. Batu Ceper Raya No. 5 D Jakarta Pusat</h5></h3> 
        </td>
        <td>
        </td>
@@ -45,7 +45,7 @@ include "koneksi.php";
        <td>
           
        </td>
-       <td class="text-center">Daftar Permintaan Obat</td>
+       <td class="text-center">Daftar Permintaan Barang</td>
        <td></td>
      </tr>
    </table>
@@ -54,11 +54,13 @@ include "koneksi.php";
 
   <table class="table" id="tb_">
       <caption>Daftar Permintaan</caption>
+      <p>Dengan Hormat</p>
+      <p>Menginat persediaan barang kami yang semakin menipis, maka kami bermaksud untuk memesan barang sebagai berikut.</p>
       <thead>
         <tr>
           <th>No</th>
           <th>Supplier</th>
-          <th>Nama obat</th>
+          <th>Nama barang</th>
           <th>Jumlah</th>
         </tr>
       </thead>
@@ -66,10 +68,10 @@ include "koneksi.php";
       <?php
       $jumlah = 0;
       $no = 1;
-      $sql = "SELECT a.*, b.nama_supp, c.nama_obat FROM tb_permintaan_list a 
+      $sql = "SELECT a.*, b.nama_supp, c.nama_barang FROM tb_permintaan_list a 
       LEFT JOIN tb_permintaan z ON a.id_per = z.id_per 
       LEFT JOIN tb_supplier b ON z.id_supp = b.id_supplier 
-      LEFT JOIN tb_obat c ON a.id_obat = c.id
+      LEFT JOIN tb_barang c ON a.id_barang = c.id
       WHERE a.id_per = '$id_per'";
       $exe = mysqli_query($conn,$sql);
       while ($value =  mysqli_fetch_array($exe)) { ?>
@@ -77,7 +79,7 @@ include "koneksi.php";
         <tr>
           <td><?php echo $no++; ?></td>
           <td><?php echo $value['nama_supp'] ?></td>
-          <td><?php echo $value['nama_obat'] ?></td>
+          <td><?php echo $value['nama_barang'] ?></td>
           <td><?php echo $value['jumlah'] ?></td>
         </tr>
 
@@ -88,7 +90,16 @@ include "koneksi.php";
         </tr>
       </tbody>
     </table>
-
+    <p>Barang-barang yang kami pesan diatas kami harap dapat segera dikirim selambat-lambatnya akan kami terima 4 hari setelah surat ini diterima. </p>
+    <div class="pull-right">
+        <p>Hormat kami :</p>
+        <p>PT GUNUNG MAS SEJAHTERA</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p>Kepala Gudang</p>
+    </div>
 </div>
 <script type="text/javascript" src="assets/js/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>

@@ -24,7 +24,7 @@ include "koneksi.php";
 		}
 </style>
 </head>
-<body onload="window.print(); history.back() " style="font-satuan: 20px;">
+<body onload="window.print();  " style="font-satuan: 20px;">
 <div class="container">
 
 <div class="row">
@@ -32,11 +32,11 @@ include "koneksi.php";
    <table class="table">
      <tr>
        <td style="width: 20% !important;">
-        <img style="width: 100%; height: 30%;" src="assets/img/logo.jpg"> 
+        <img style="width: 100px; height: 100px;" src="assets/img/logo.png"> 
        </td>
        <td>
-        <h3 class="text-center">Apotek Nusa Indah<br>
-           <h5 class="text-center">Jln Dipati Ukur No 76 Kota Bandung</h5></h3> 
+        <h3 class="text-center">CV Gunung Mas Sejahtera<br>
+           <h5 class="text-center">Jl. Batu Ceper Raya No. 5 D Jakarta Pusat</h5></h3> 
        </td>
        <td>
        </td>
@@ -46,24 +46,24 @@ include "koneksi.php";
         $akhir  = $_GET['akhir'];
 
           $sql = " SELECT a.*,
-                b.nm_obat, 
-                b.hr_obat,
+                b.nm_barang, 
+                b.hr_barang,
                 b.satuan, 
-                b.jm_obat,
+                b.jm_barang,
                 b.laba, 
-                b.jum_obat
+                b.jum_barang
             FROM tb_transaksi a 
             LEFT JOIN (
               SELECT 
                 z.id_trans, 
-                SUM(z.jumlah) as jum_obat ,
+                SUM(z.jumlah) as jum_barang ,
                 SUM(z.laba) as laba,
-                GROUP_CONCAT(x.nama_obat) as nm_obat ,
-                GROUP_CONCAT(x.harga_jual) as hr_obat ,
+                GROUP_CONCAT(x.nama_barang) as nm_barang ,
+                GROUP_CONCAT(x.harga_jual) as hr_barang ,
                 GROUP_CONCAT(x.satuan) as satuan ,
-                GROUP_CONCAT(z.jumlah) as jm_obat 
+                GROUP_CONCAT(z.jumlah) as jm_barang 
                 FROM tb_transaksi_list z  
-                LEFT JOIN  tb_obat x ON z.id_menu = x.id 
+                LEFT JOIN  tb_barang x ON z.id_menu = x.id 
                 GROUP BY z.id_trans
             ) as b ON b.id_trans = a.id
             WHERE a.tgl_transaksi BETWEEN '$awal' AND '$akhir'
@@ -85,9 +85,10 @@ include "koneksi.php";
           <tr>
             <th>No</th>
             <th>Tgl Transaksi</th>
-            <th style="width: 10px;">Total Jenis obat</th>
-            <th style="width: 10px;">Total obat </th>
-            <th align="center" style="width: 40%;">List obat </th>
+            <th>Konsumen</th>
+            <th style="width: 10px;">Total Jenis barang</th>
+            <th style="width: 10px;">Total barang </th>
+            <th align="center" style="width: 40%;">List barang </th>
             <th>Total harga</th>
             <th>Laba Keuntungan</th>
           </tr>
@@ -104,8 +105,9 @@ include "koneksi.php";
           <tr>
             <td><?php echo $no++; ?></td>
             <td><?php echo date('d-M-Y H:i A', strtotime($tran['tgl_transaksi'])); ?></td>
+            <td><?php echo $tran['nama_konsumen']; ?></td>
             <td><?php echo $tran['jumlah_menu']; ?></td>
-            <td><?php echo $tran['jum_obat']; ?></td>
+            <td><?php echo $tran['jum_barang']; ?></td>
             <td><table style="width: 100%;">
               <thead>
                 <tr>
@@ -117,10 +119,10 @@ include "koneksi.php";
               </thead>
               <tbody>
               <?php 
-                $nm = split(',', $tran['nm_obat']);
+                $nm = split(',', $tran['nm_barang']);
                 $sz = split(',', $tran['satuan']);
-                $hr = split(',', $tran['hr_obat']);
-                $jm = split(',', $tran['jm_obat']);
+                $hr = split(',', $tran['hr_barang']);
+                $jm = split(',', $tran['jm_barang']);
                for ($i=0; $i < count($jm) ; $i++) {             
                ?>
 
@@ -160,7 +162,7 @@ include "koneksi.php";
           }
         ?>
           <tr>
-              <td colspan="5">Total : </td>
+              <td colspan="6">Total : </td>
               <td>Rp.<?php echo number_format($totlaba ,0,',','.');  ?></td>
               <td>Rp.<?php echo number_format($totpen ,0,',','.');  ?></td>
           </tr>

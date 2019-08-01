@@ -24,17 +24,17 @@ include "koneksi.php";
 		}
 </style>
 </head>
-<body onload="window.print(); history.back() " style="font-size: 20px;">
+<body onload="window.print(); " style="font-size: 20px;">
 <div class="container">
   
-  <h3 align="center">REKAP STOK OBAT TANGGAL <?php echo date("d / M / Y"); ?></h3>
+  <h3 align="center">REKAP STOK BARANG TANGGAL <?php echo date("d / M / Y"); ?></h3>
 
  <table class="table table-responsive table-bordered" id="tb_master">
     <thead>
       <tr>
         <th>No</th>
         <th style="display: none;">id</th>
-        <th>Nama obat</th>
+        <th>Nama barang</th>
         <th style="display: none;">idj</th>
         <th>Jenis</th>
         <th>Keterangan</th>
@@ -47,13 +47,13 @@ include "koneksi.php";
     <tbody>
     <?php 
       $no = 1;
-      $sql = "SELECT *, a.id as idm, b.id as idj FROM tb_obat a LEFT JOIN tb_jenis b ON a.jenis = b.id";
+      $sql = "SELECT *, a.id as idm, b.id as idj FROM tb_barang a LEFT JOIN tb_jenis b ON a.jenis = b.id";
       $query  = mysqli_query($conn,$sql);
       while ($data = mysqli_fetch_array($query)) { ?>
       <tr>
         <td><?php echo $no; ?></td>
         <td style="display: none;"><?php echo $data['idm']; ?></td>
-        <td><?php echo $data['nama_obat'] ?></td>
+        <td><?php echo $data['nama_barang'] ?></td>
         <td style="display: none;"><?php echo $data['jenis'] ?></td>
         <td><?php echo $data['nama_jenis'] ?></td>
         <td><?php echo $data['keterangan'] ?></td>

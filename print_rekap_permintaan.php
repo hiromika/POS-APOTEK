@@ -24,7 +24,7 @@ include "koneksi.php";
 		}
 </style>
 </head>
-<body onload="window.print(); history.back() " style="font-satuan: 20px;">
+<body onload="window.print();  " style="font-satuan: 20px;">
 <div class="container">
 
 <div class="row">
@@ -32,11 +32,11 @@ include "koneksi.php";
    <table class="table">
      <tr>
        <td style="width: 20% !important;">
-        <img style="width: 100%; height: 30%;" src="assets/img/logo.jpg"> 
+        <img style="width: 100px; height: 100px;" src="assets/img/logo.png"> 
        </td>
        <td>
-        <h3 class="text-center">Apotek Nusa Indah<br>
-           <h5 class="text-center">Jln Dipati Ukur No 76 Kota Bandung</h5></h3> 
+        <h3 class="text-center">CV Gunung Mas Sejahtera<br>
+           <h5 class="text-center">Jl. Batu Ceper Raya No. 5 D Jakarta Pusat</h5></h3> 
        </td>
        <td>
        </td>
@@ -61,7 +61,7 @@ include "koneksi.php";
         <th>No</th>
         <th>Tanggal</th>
         <th>Supplier</th>
-        <th>Nama obat</th>
+        <th>Nama barang</th>
         <th>Jumlah</th>
       </tr>
       </thead>
@@ -70,16 +70,16 @@ include "koneksi.php";
       $jumlah = 0;
       $no = 1;
       if (isset($tgl)) {
-        $sql = "SELECT a.*, b.nama_supp, c.nama_obat, z.tgl FROM tb_permintaan_list a 
+        $sql = "SELECT a.*, b.nama_supp, c.nama_barang, z.tgl FROM tb_permintaan_list a 
         LEFT JOIN tb_permintaan z ON a.id_per = z.id_per 
         LEFT JOIN tb_supplier b ON z.id_supp = b.id_supplier 
-        LEFT JOIN tb_obat c ON a.id_obat = c.id
+        LEFT JOIN tb_barang c ON a.id_barang = c.id
         WHERE z.tgl BETWEEN '$awal' AND '$akhir'";
       }else{
-        $sql = "SELECT a.*, b.nama_supp, c.nama_obat, z.tgl FROM tb_permintaan_list a 
+        $sql = "SELECT a.*, b.nama_supp, c.nama_barang, z.tgl FROM tb_permintaan_list a 
         LEFT JOIN tb_permintaan z ON a.id_per = z.id_per 
         LEFT JOIN tb_supplier b ON z.id_supp = b.id_supplier 
-        LEFT JOIN tb_obat c ON a.id_obat = c.id";
+        LEFT JOIN tb_barang c ON a.id_barang = c.id";
       }
 
       $exe = mysqli_query($conn,$sql);
@@ -89,7 +89,7 @@ include "koneksi.php";
         <td><?php echo $no++; ?></td>
         <td><?php echo date('d-m-Y', strtotime($value['tgl'])); ?></td>
         <td><?php echo $value['nama_supp'] ?></td>
-        <td><?php echo $value['nama_obat'] ?></td>
+        <td><?php echo $value['nama_barang'] ?></td>
         <td><?php echo $value['jumlah'] ?></td>
       </tr>
 

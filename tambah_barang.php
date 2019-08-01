@@ -1,13 +1,13 @@
-<h1>Form Penambahan Obat</h1>
+<h1>Form Penambahan Barang</h1>
 <hr>
 
 <div class="row">
 	<div class="col-md-12">
-		  <form action="proses_master.php?kode=3&id=&ido=" method="POST" class="form" accept-charset="utf-8">
+		  <form action="proses_master.php?kode=3&id=&ido=" method="POST" class="form" enctype="multipart/form-data" accept-charset="utf-8">
 			
 			<div class="form-group">
-				<label> Kode obat :</label>
-				<input type="text" class="form-control" name="kode_obat" value="" placeholder="Kode obat">
+				<label> Kode barang :</label>
+				<input type="text" class="form-control" name="kode_barang" value="" placeholder="Kode barang">
 			</div>
 			<div class="form-group">
 				<label> Supplier :</label>
@@ -23,16 +23,14 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label> Nama obat :</label>
-				<input type="text" class="form-control" name="nama_obat" value="" placeholder="Nama obat">
+				<label> Nama barang :</label>
+				<input type="text" class="form-control" name="nama_barang" value="" placeholder="Nama barang">
 			</div>
 			<div class="form-group">
 				<label> satuan :</label>
 				<select name="satuan" class="form-control">
 					<option selected="" disabled >~ Pilih Satuan ~</option>
-					<option value="Strip" > Strip </option>
-					<option value="Botol" > Botol </option>
-					<option value="Butir" > Butir </option>
+					<option value="Unit" > Unit </option>
 				</select>
 			</div>
 			<div class="form-group">
@@ -49,8 +47,8 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label> Tgl Expired:</label>
-				<input type="text" class="form-control exp" name="tgl_exp" value="" placeholder="Tgl Expired">
+				<label> Tgl Barang Masuk:</label>
+				<input type="text" class="form-control exp" name="tgl_exp" value="" placeholder="Tgl Barang Masuk">
 			</div>
 			<div class="form-group">
 				<label> Stock :</label>
@@ -66,7 +64,11 @@
 			</div>
 			<div class="form-group">
 				<label> Keterangan : </label>
-				<textarea name="keterangan" class="form-control" placeholder="Kategori"></textarea>
+				<textarea name="keterangan" class="form-control" placeholder="Keterangan"></textarea>
+			</div>
+			<div class="form-group">
+				<label> Foto Barang : </label>
+				<input name="myFile" type="file" id="myFile" class="form-control" required />
 			</div>
 	        <button type="submit" class="btn btn-primary">Tambah</button>
 		</form>

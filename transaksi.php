@@ -25,8 +25,8 @@
           <tr class="bg-info">
             <th>No</th>
             <th style="display: none;">id</th>
-            <th>Kode Obat</th>
-            <th>Nama Obat</th>
+            <th>Kode barang</th>
+            <th>Nama barang</th>
             <th>Satuan</th>
             <th style="display: none;">idj</th>
             <th>Jenis</th>
@@ -40,7 +40,7 @@
         <tbody>
         <?php 
           $no = 1;
-          $sql = "SELECT *, a.id as idb, b.id as idj FROM tb_obat a 
+          $sql = "SELECT *, a.id as idb, b.id as idj FROM tb_barang a 
           LEFT JOIN tb_jenis b ON a.jenis = b.id 
           WHERE a.jenis = '$jenis[id]'";
           $query  = mysqli_query($conn,$sql);
@@ -48,8 +48,8 @@
           <tr>
             <td><?php echo $no++; ?></td>
             <td style="display: none;"><?php echo $data['idb']; ?></td>
-            <td><?php echo $data['kode_obat'] ?></td>
-            <td><?php echo $data['nama_obat'] ?></td>
+            <td><?php echo $data['kode_barang'] ?></td>
+            <td><?php echo $data['nama_barang'] ?></td>
             <td><?php echo $data['satuan'] ?></td>
             <td style="display: none;"><?php echo $data['jenis'] ?></td>
             <td><?php echo $data['nama_jenis'] ?></td>
@@ -88,7 +88,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Nama Obat</th>
+        <th>Nama barang</th>
         <th>Satuan</th>
         <th>Harga</th>
         <th>Jumlah</th>
@@ -100,13 +100,13 @@
     <?php
         if ($idt > 0) { 
        
-        $sql2    = "SELECT *,a.id as idts FROM tb_transaksi_list a LEFT JOIN tb_obat b ON a.id_menu=b.id  WHERE a.id_trans = '$idt'";
+        $sql2    = "SELECT *,a.id as idts FROM tb_transaksi_list a LEFT JOIN tb_barang b ON a.id_menu=b.id  WHERE a.id_trans = '$idt'";
         $query2  = mysqli_query($conn,$sql2); 
 
         while ($data = mysqli_fetch_array($query2)) {
     ?>
       <tr>
-        <td><?php echo $data['nama_obat']; ?></td>
+        <td><?php echo $data['nama_barang']; ?></td>
         <td><?php echo $data['satuan']; ?></td>
         <td>Rp.<?php echo number_format($data['harga_jual'],0,',','.'); ?></td>
         <td><?php echo $data['jumlah']; ?></td>
@@ -124,11 +124,19 @@
         <input type="hidden" class="tot" name="total" value="<?php echo $tot['total_harga']; ?>" placeholder="">
       </tr>
       <tr>
+        <th colspan="4" class="text-center">Nama Konsumen :</th>
+        <td colspan="">
+          <div class="form-group">
+            <input type="text" name="konsumen" value="" id="konsumen" step="100" require="" placeholder="" class="form-control"></td>
+          </div>
+        <td></td>
+      </tr>
+      <tr>
         <th colspan="4" class="text-center">Uang Pembayaran :</th>
         <td colspan="">
           <div class="input-group">
             <span class="input-group-addon">Rp.</span>
-            <input type="number" name="bayar" value="" step="100" placeholder="" class="bayar form-control"></td>
+            <input type="number" name="bayar" value="" id="bayar" step="100" require="" placeholder="" class="bayar form-control"></td>
           </div>
         <td></td>
       </tr>
@@ -173,19 +181,29 @@
   });
 
   $('.print').on('click', function(event) {
-    event.preventDefault();  
-    var bayar = $('.bayar').val();
-    var kembali = $('.bayar').val() - $('.tot').val();
-    $(location).attr('href', 'print_trans.php?idt=<?php echo $idt; ?>&bayar='+bayar+'&kembali='+kembali);
+    event.preventDefault(); 
+    if($('#konsumen').val() != "" || $('#bayar').val() != ""){
+      var bayar = $('.bayar').val();
+      var konsumen =$('#konsumen').val();
+      var kembali = $('.bayar').val() - $('.tot').val();
+      $(location).attr('href', 'print_trans.php?idt=<?php echo $idt; ?>&bayar='+bayar+'&kembali='+kembali+'&konsumen='+konsumen);
+    }else{
+        alert('Data Belum Lengkap.!');
+    }
   }); 
 
   $('.done').on('click', function(event) {
     event.preventDefault();
-    if (confirm('Transaksi Selesai.. ?')){
-      var bayar = $('.bayar').val();
-      var kembali = $('.bayar').val() - $('.tot').val();
-      $(location).attr('href', 'proses_trans.php?kode=4&idt=<?php echo $idt; ?>&bayar='+bayar+'&kembali='+kembali);
-    }  
+    if($('#konsumen').val() != "" || $('#bayar').val() != ""){
+      if (confirm('Transaksi Selesai.. ?')){
+        var konsumen =$('#konsumen').val();
+        var bayar = $('.bayar').val();
+        var kembali = $('.bayar').val() - $('.tot').val();
+        $(location).attr('href', 'proses_trans.php?kode=4&idt=<?php echo $idt; ?>&bayar='+bayar+'&kembali='+kembali+'&konsumen='+konsumen);
+      }
+    }else{
+        alert('Data Belum Lengkap.!');
+    }
   });
 
   $(document).ready(function(){

@@ -11,7 +11,7 @@
     }
     .judul{
       margin: 80px 0 20px 0;
-      color: white;
+      color: BLACK;
       text-shadow: 2px 2px 2px black;
       font-family: serif;
     }
@@ -19,7 +19,7 @@
       min-height: 350px;
       width: 80%;
       margin: 0 auto 0 auto;
-      background: linear-gradient(45deg, #003399,#fff);
+      background: linear-gradient(45deg, #00ff00,#fff);
       border-radius: 5px;
       padding: 20px;
       box-shadow: 0px 0px 10px 2px white;
@@ -40,9 +40,9 @@
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 col-sm-12">
-      <center><h1 class="judul">APOTEK NUSA INDAH</h1></center>
+      <center><h1 class="judul">CV GUNUNG MAS SEJAHTERA</h1></center>
       <div class="bungkus text-center">
-        <center><img src="assets/img/logo.jpg" width="150px" height="150px" style="color:black" class="img-login img-thumbnail"></center>        
+        <center><img src="assets/img/logo.png" width="150px" height="150px" style="color:black" class="img-login img-thumbnail"></center>        
         <form action="proses_login.php" method="POST" class="login">
           <div class="form-group">
             <label for="username">USERNAME</label>

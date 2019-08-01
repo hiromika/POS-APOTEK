@@ -27,7 +27,7 @@ include "koneksi.php";
 		}
 </style>
 </head>
-<body onload="window.print(); history.back()  " style="font-size: 20px;">
+<body onload="window.print();   " style="font-size: 20px;">
 <div class="container">
   
 <?php  
@@ -40,11 +40,11 @@ include "koneksi.php";
    <table class="table">
      <tr>
        <td style="width: 30% !important;">
-        <img style="width: 50%; height: 30%;" src="assets/img/logo.jpg"> 
+        <img style="width: 100px; height: 100px;" src="assets/img/logo.png"> 
        </td>
        <td>
-        <h3 class="text-center">Apotek Nusa Indah<br>
-           <h5 class="text-center">Jln Dipati Ukur No 76 Kota Bandung</h5></h3> 
+        <h3 class="text-center">CV Gunung Mas Sejahtera<br>
+           <h5 class="text-center">Jl. Batu Ceper Raya No. 5 D Jakarta Pusat</h5></h3> 
        </td>
        <td>
        </td>
@@ -53,7 +53,7 @@ include "koneksi.php";
        <td>
           <h5>TR-<?php echo $trans['id'] ?></h5>
        </td>
-       <td class="text-center">Transaksi</td>
+       <td class="text-center">Transaksi <?php echo $_GET['konsumen'] ?></td>
        <td><h5 class='pull-right'><?php  echo date('d-m-Y',strtotime($trans['tgl_transaksi'])); ?></h5></td>
      </tr>
    </table>
@@ -75,14 +75,14 @@ include "koneksi.php";
     <?php
         if ($idt > 0) { 
        
-        $sql2    = "SELECT *,a.id as idts FROM tb_transaksi_list a LEFT JOIN tb_obat b ON a.id_menu=b.id  WHERE a.id_trans = '$idt'";
+        $sql2    = "SELECT *,a.id as idts FROM tb_transaksi_list a LEFT JOIN tb_barang b ON a.id_menu=b.id  WHERE a.id_trans = '$idt'";
         $query2  = mysqli_query($conn,$sql2); 
 
         while ($data = mysqli_fetch_array($query2)) {
        
     ?>
       <tr>
-        <td><?php echo $data['nama_obat']; ?></td>
+        <td><?php echo $data['nama_barang']; ?></td>
         <td><?php echo number_format($data['harga_jual'],0,',','.'); ?></td>
         <td><?php echo $data['satuan']; ?></td>
         <td><?php echo $data['jumlah']; ?></td>

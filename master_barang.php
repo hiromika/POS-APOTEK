@@ -1,15 +1,16 @@
-<h1>Master Data Obat</h1>
-<!-- <button type="button" style="margin-bottom: 10px;" class="btn btn-info pull-right" data-toggle="modal" id="btntambah">Tambah obat</button> -->
+<h1>Master Data Barang</h1>
+<a href="home.php?link=tambah_barang" style="margin-bottom: 10px;" class="btn btn-info pull-right">Tambah Barang</a>
+<!-- <button type="button" style="margin-bottom: 10px;" class="btn btn-info pull-right" data-toggle="modal" id="btntambah">Tambah Barang</button> -->
 <br>
 	<table class="table table-responsive table-hover" id="tb_master">
 		<thead>
 			<tr>
 				<th>No</th>
 				<th style="display: none;">id</th>
-				<th>Kode obat</th>
+				<th>Kode barang</th>
 				<th style="display: none;">ids</th>
 				<th>Supplier</th>
-				<th>Nama obat</th>
+				<th>Nama barang</th>
 				<th style="display: none;">idj</th>
 				<th>satuan</th>
 				<th>Jenis</th>
@@ -24,16 +25,16 @@
 		<tbody>
 		<?php 
 			$no = 1;
-			$sql = "SELECT *, a.id as idm, b.id as idj, c.id_supplier as id_supp FROM tb_obat a LEFT JOIN tb_jenis b ON a.jenis = b.id LEFT JOIN tb_supplier c ON a.id_supp = c.id_supplier";
+			$sql = "SELECT *, a.id as idm, b.id as idj, c.id_supplier as id_supp FROM tb_barang a LEFT JOIN tb_jenis b ON a.jenis = b.id LEFT JOIN tb_supplier c ON a.id_supp = c.id_supplier";
 			$query  = mysqli_query($conn,$sql);
 			while ($data = mysqli_fetch_array($query)) { ?>
 			<tr>
 				<td><?php echo $no; ?></td>
 				<td style="display: none;"><?php echo $data['idm']; ?></td>
-				<td><?php echo $data['kode_obat'] ?></td>
+				<td><?php echo $data['kode_barang'] ?></td>
 				<td style="display: none;"><?php echo $data['id_supp'] ?></td>
 				<td><?php echo $data['nama_supp'] ?></td>
-				<td><?php echo $data['nama_obat'] ?></td>
+				<td><?php echo $data['nama_barang'] ?></td>
 				<td style="display: none;"><?php echo $data['jenis'] ?></td>
 				<td><?php echo $data['satuan'] ?></td>
 				<td><?php echo $data['nama_jenis'] ?></td>
@@ -44,7 +45,7 @@
 				<td><?php echo date('d-M-Y H:i A', strtotime($data['last_update'])); ?></td>
 				<td>
 				<a href="" class="btn btn-success btn-xs btnedit" data-toggle="modal" title="">Edit</a>&nbsp
-				<a href="home.php?link=master_obat_view&id=<?php echo $data['idm'];?>&ido=" class="btn btn-info btn-xs" title="">View</a>
+				<a href="home.php?link=master_barang_view&id=<?php echo $data['idm'];?>&ido=" class="btn btn-info btn-xs" title="">View</a>
 				<a href="proses_master.php?kode=1&id=<?php echo $data['idm'];?>&ido=" class="btn btn-danger btn-xs" onclick="return confirm('Apakah Anda Yakin.. ?');" title="">Delete</a>
 				</td>
 			</tr>
@@ -70,15 +71,15 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Tambah Obat</h4>
+        <h4 class="modal-title">Tambah barang</h4>
       </div>
       <div class="modal-body">
        
 	     <form action="proses_master.php?kode=3&id=&ido=" method="POST" class="form" accept-charset="utf-8">
 			
 			<div class="form-group">
-				<label> Kode obat :</label>
-				<input type="text" class="form-control" name="kode_obat" value="" placeholder="Kode obat">
+				<label> Kode barang :</label>
+				<input type="text" class="form-control" name="kode_barang" value="" placeholder="Kode barang">
 			</div>
 			<div class="form-group">
 				<label> Supplier :</label>
@@ -94,16 +95,14 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label> Nama obat :</label>
-				<input type="text" class="form-control" name="nama_obat" value="" placeholder="Nama obat">
+				<label> Nama barang :</label>
+				<input type="text" class="form-control" name="nama_barang" value="" placeholder="Nama barang">
 			</div>
 			<div class="form-group">
 				<label> satuan :</label>
 				<select name="satuan" class="form-control">
 					<option selected="" disabled >~ Pilih Satuan ~</option>
-					<option value="Strip" > Strip </option>
-					<option value="Botol" > Botol </option>
-					<option value="Butir" > Butir </option>
+					<option value="Unit" > Unit </option>
 				</select>
 			</div>
 			<div class="form-group">
@@ -160,18 +159,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Obat</h4>
+        <h4 class="modal-title">Edit barang</h4>
       </div>
       <div class="modal-body">
        
 	     <form action="proses_master.php?kode=2&id=&ido=" method="POST" class="form" accept-charset="utf-8">
 	     	<div class="row">
 	     		<div class="col-md-6">
-	     			<h4>Edit Data Obat</h4>
+	     			<h4>Edit Data barang</h4>
 			     	<input style="display: none;" type="text" name="id" id="id" value="">
 					<div class="form-group">
-						<label> Kode obat :</label>
-						<input type="text" class="form-control" name="kode_obat" id="kode_obat" value="" placeholder="Kode obat">
+						<label> Kode barang :</label>
+						<input type="text" class="form-control" name="kode_barang" id="kode_barang" value="" placeholder="Kode barang">
 					</div>
 					<div class="form-group">
 						<label> Supplier :</label>
@@ -188,15 +187,13 @@
 					</div>
 					<div class="form-group">
 						<label> Nama Menu :</label>
-						<input type="text" class="form-control" id="nama_obat" name="nama_obat" value="">
+						<input type="text" class="form-control" id="nama_barang" name="nama_barang" value="">
 					</div>
 					<div class="form-group">
 						<label> satuan </label>
-						<select name="satuan" id="satuan_obat" class="form-control">
+						<select name="satuan" id="satuan_barang" class="form-control">
 							<option selected="" disabled >~ Pilih Satuan ~</option>
-							<option value="Strip" > Strip </option>
-							<option value="Botol" > Botol </option>
-							<option value="Butir" > Butir </option>
+							<option value="Unit" > Unit </option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -214,11 +211,11 @@
 					</div>
 					<div class="form-group">
 						<label> Harga Modal:</label>
-						<input type="number" class="form-control" name="harga_modal" id="harga_modal" value="">
+						<input type="text" class="form-control" name="harga_modal" id="harga_modal" value="">
 					</div>
 					<div class="form-group">
 						<label> Harga Jual:</label>
-						<input type="number" class="form-control" name="harga_jual" id="harga_jual" value="">
+						<input type="text" class="form-control" name="harga_jual" id="harga_jual" value="">
 					</div>
 					<div class="form-group">
 						<label> Keterangan : </label>
@@ -226,9 +223,9 @@
 					</div>
 	     		</div>
 	     		<div class="col-md-6">
-	     			<h4>Tambah Stock Obat</h4>
+	     			<h4>Tambah Stock barang</h4>
 					<div class="form-group">
-						<label> Tgl Expired:</label>
+						<label> Tgl Barang Masuk:</label>
 						<input type="text" class="form-control exp2" name="tgl_exp" id="tgl_exp" value="">
 					</div>
 					<div class="form-group">
@@ -277,9 +274,9 @@ $(".btnedit").click(function(){
         	keyboard : false,
   });
   $("#id").val($(this).closest('tr').children()[1].textContent);
-  $("#kode_obat").val($(this).closest('tr').children()[2].textContent);
-  $("#nama_obat").val($(this).closest('tr').children()[5].textContent);
-  $("#satuan_obat").val($(this).closest('tr').children()[7].textContent);
+  $("#kode_barang").val($(this).closest('tr').children()[2].textContent);
+  $("#nama_barang").val($(this).closest('tr').children()[5].textContent);
+  $("#satuan_barang").val($(this).closest('tr').children()[7].textContent);
   $("#harga_modal").val($(this).closest('tr').children()[10].textContent);
   $("#harga_jual").val($(this).closest('tr').children()[11].textContent);
   $("#jenis").val($(this).closest('tr').children()[6].textContent);

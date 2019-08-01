@@ -6,7 +6,7 @@ if (isset($_SESSION['username'])){
 <!DOCTYPE html>
 <html lang="">
 <head>
-  <title>APOTEK NUSA INDAH</title>
+  <title>CV GUNUNG MAS SEJAHTERA</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
@@ -32,7 +32,7 @@ if (isset($_SESSION['username'])){
     <div id="wrapper" class="toggled">
 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
+        <div id="sidebar-wrapper" style="background: #1e421e;">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="home.php?link=0">
@@ -44,17 +44,17 @@ if (isset($_SESSION['username'])){
                       <a href="home.php?link=master_supp">Master Supplier</a>
                   </li>
                   <li>
-                      <a href="home.php?link=master_obat">Master Obat</a>
+                      <a href="home.php?link=master_barang">Master Barang</a>
                   </li>
                   <li>
-                      <a href="home.php?link=jenis_obat">Master Jenis Obat</a>
+                      <a href="home.php?link=jenis_barang">Master Jenis Barang</a>
                   </li> 
                   <li>
-                      <a href="home.php?link=permintaan&id_per=0">Form Permintaan Obat</a>
+                      <a href="home.php?link=permintaan&id_per=0">Form Permintaan barang</a>
                   </li>
                   <li><a href="#" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">Laporan</a>
                     <ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
-                      <li><a href="home.php?link=rekap_permintaan" >Laporan Permintaan Obat</a></li>
+                      <li><a href="home.php?link=rekap_permintaan" >Laporan Permintaan barang</a></li>
                     </ul>
                   </li>
                   <li>
@@ -66,7 +66,7 @@ if (isset($_SESSION['username'])){
                       <a href="home.php?link=transaksi&idt=0">Penjualan</a>
                   </li>
                      <li>
-                      <a href="home.php?link=rekap">Laporan Penjualan Obat</a>
+                      <a href="home.php?link=rekap">Laporan Penjualan Barang</a>
                   </li>
                     <li>
                       <a href="logout.php">Logout</a>
@@ -74,30 +74,30 @@ if (isset($_SESSION['username'])){
                 <?php 
                 }else{ ?>
                   <li>
-                      <a href="home.php?link=transaksi&idt=0">Penjualan</a>
+                      <a href="home.php?link=men_user">Manajemen pengguna</a>
                   </li>
                   <li>
                       <a href="home.php?link=master_supp">Master Supplier</a>
                   </li>
                   <li>
-                      <a href="home.php?link=master_obat">Master Obat</a>
+                      <a href="home.php?link=jenis_barang">Master Jenis Barang</a>
                   </li>
                   <li>
-                      <a href="home.php?link=jenis_obat">Master Jenis Obat</a>
+                      <a href="home.php?link=master_barang">Master Barang</a>
                   </li>
                   <li>
-                      <a href="home.php?link=men_user">Manajemen pengguna</a>
+                      <a href="home.php?link=transaksi&idt=0">Penjualan</a>
                   </li>
                   <li>
-                      <a href="home.php?link=permintaan&id_per=0">Form Permintaan Obat</a>
+                      <a href="home.php?link=permintaan&id_per=0">Form Permintaan Barang</a>
                   </li> 
-                  <li>
-                      <a href="home.php?link=tambah_obat">Form Penambahan Obat</a>
-                  </li> 
+                  <!-- <li>
+                      <a href="home.php?link=tambah_barang">Form Penambahan Barang</a>
+                  </li>  -->
                   <li><a href="#" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">Laporan</a>
                     <ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
-                      <li><a href="home.php?link=rekap" >Laporan Penjualan Obat</a></li>
-                      <li><a href="home.php?link=rekap_permintaan" >Laporan Permintaan Obat</a></li>
+                      <li><a href="home.php?link=rekap" >Laporan Penjualan Barang</a></li>
+                      <li><a href="home.php?link=rekap_permintaan" >Laporan Permintaan Barang</a></li>
                     </ul>
                   </li>
                   <li>
@@ -121,8 +121,8 @@ if (isset($_SESSION['username'])){
                 </h2>
                 </div> 
                 <div class="col-md-11">
-                  <h2>Apotek Nusa Indah <p class="pull-right" style="font-size: 16px !important;"><?php echo $_SESSION['username']; ?></p><h2><hr style="margin: 0px !important;">
-                  <h5>Jln Dipati Ukur No 76 Kota Bandung</h5>
+                  <h2>CV GUNUNG MAS SEJAHTERA <p class="pull-right" style="font-size: 16px !important;"><b>Selamat Datang :</b> <?php echo $_SESSION['username']; ?></p><h2><hr style="margin: 0px !important;">
+                  <h5>Jl. Batu Ceper Raya No. 5 D Jakarta Pusat</h5>
                 </div>
               </div>
             </div>
@@ -134,8 +134,8 @@ if (isset($_SESSION['username'])){
               <?php 
               $link = $_GET['link'];
               switch ($link) {
-                case 'master_obat':
-                  include "master_obat.php";
+                case 'master_barang':
+                  include "master_barang.php";
                   break; 
                 case 'transaksi':
                   include "transaksi.php";
@@ -143,14 +143,14 @@ if (isset($_SESSION['username'])){
                 case 'rekap':
                   include "rekap.php";
                   break;
-                case 'jenis_obat':
-                  include "jenis_obat.php";
+                case 'jenis_barang':
+                  include "jenis_barang.php";
                   break;  
                 case 'master_supp':
                   include "master_supp.php";
                   break; 
-                case 'master_obat_view':
-                  include "master_obat_detail.php";
+                case 'master_barang_view':
+                  include "master_barang_detail.php";
                   break;
                 case 'men_user':
                   include "master_user.php";
@@ -158,8 +158,8 @@ if (isset($_SESSION['username'])){
                 case 'permintaan':
                   include "permintaan.php";
                   break;
-                case 'tambah_obat':
-                  include "tambah_obat.php";
+                case 'tambah_barang':
+                  include "tambah_barang.php";
                   break; 
                 case 'rekap_permintaan':
                   include "rekap_permintaan.php";
