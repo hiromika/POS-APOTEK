@@ -53,8 +53,13 @@ include "koneksi.php";
        <td>
           <h5>TR-<?php echo $trans['id'] ?></h5>
        </td>
-       <td class="text-center">Transaksi <?php echo $_GET['konsumen'] ?></td>
+       <td class="text-center">Transaksi</td>
        <td><h5 class='pull-right'><?php  echo date('d-m-Y',strtotime($trans['tgl_transaksi'])); ?></h5></td>
+     </tr>
+     <tr>
+       <td colspan="3" style="padding-bottom: 0px !important;">
+         Nama Konsumen : <?php echo $_GET['konsumen'] ?>
+       </td>
      </tr>
    </table>
    </div>  
